@@ -34,7 +34,14 @@ public class UploadService {
         }
     }
 
-    public Upload v1사진보기() {
+    public Upload 사진보기() {
         return uploadRepository.findById(1);
     }
+
+    @Transactional
+    public void v2사진저장(UploadRequest.V2DTO v2DTO) {
+        String profileUrl = MyFileUtil.fileSave(v2DTO.getImg());
+        uploadRepository.save(v2DTO.toEntity(profileUrl));
+    }
+
 }
